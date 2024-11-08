@@ -1,9 +1,9 @@
 <template>
   <div class="home-page">
     <div class="hero-section">
-      <img src="https://pcgamermexico.com/stupload/stswiper/pcgamerbanner-scaled.png" alt="Imagen de fondo de la tienda" class="hero-image">
-      <h1 class="hero-title">Tu Tienda de Componentes de PC</h1>
-      <p class="hero-text">Encuentra todo lo que necesitas para armar tu PC gamer soñado.</p>
+      <img src="https://cinturonesfreedom.com/cdn/shop/files/Banner-Fredom-tactico_1500x.png?v=1692721458" alt="Imagen de fondo de la tienda de cinturones" class="hero-image">
+      <h1 class="hero-title">Tu Tienda de Correas y Cinturones</h1>
+      <p class="hero-text">Descubre nuestra colección de cinturones para cada ocasión y estilo.</p>
       <NuxtLink to="/dashboard/">
         <v-btn color="primary" outlined>Explora nuestros productos</v-btn>
       </NuxtLink>
@@ -15,8 +15,7 @@
   </div>
 </template>
 
-  
-  <script>
+<script>
 export default {
   computed: {
     counter() {
@@ -29,9 +28,7 @@ export default {
     }
   }
 }
-
 </script>
-
 
 <style>
 .home-page {
