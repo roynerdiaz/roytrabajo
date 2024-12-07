@@ -12,7 +12,7 @@ const store = createStore({
         {
           imagen:
             "https://m.media-amazon.com/images/I/71Unaoc42ZL._AC_SX569_.jpg",
-          precio: "120.00$",
+          precio: 120.00,
           titulo: "Cinturón de tejido elástico",
           descripcion: "tubular para hombre",
           id: 1,
@@ -20,7 +20,7 @@ const store = createStore({
         {
           imagen:
             "https://m.media-amazon.com/images/I/81cr3lwVSxL._AC_SX569_.jpg",
-          precio: "38.00$",
+          precio: 38.00,
           titulo: "Cinturón táctico JUKMO",
           descripcion: "cinturón de nailon para pistola",
           id: 2,
@@ -28,7 +28,7 @@ const store = createStore({
         {
           imagen:
             "https://m.media-amazon.com/images/I/91oezb7CluL._AC_SX569_.jpg",
-          precio: "34.00$",
+          precio: 34.00,
           titulo: "Zitahli Cinturón de trinquete",
           descripcion: "cinturón de cuero para hombre",
           id: 3,
@@ -36,7 +36,7 @@ const store = createStore({
         {
           imagen:
             "https://m.media-amazon.com/images/I/81u3jhX+zLL._AC_SX569_.jpg",
-          precio: "135.00$",
+          precio: 135.00,
           titulo: "BULLIANT Cinturón de trinquete",
           descripcion: "cinturón casual de nailon",
           id: 4,
@@ -44,7 +44,7 @@ const store = createStore({
         {
           imagen:
             "https://m.media-amazon.com/images/I/718lKibkAFL._AC_SX569_.jpg",
-          precio: "120.00$",
+          precio: 120.00,
           titulo: "BOSTANTEN Cinturón de cuero",
           descripcion: "para hombre, vestido e informal",
           id: 5,
@@ -52,7 +52,7 @@ const store = createStore({
         {
           imagen:
             "https://m.media-amazon.com/images/I/713Og-pjL-L._AC_SY550_.jpg",
-          precio: "90.00$",
+          precio: 90.00,
           titulo: "Timberland Cinturón de cuero",
           descripcion: "on hebilla clásica de 1.378",
           id: 6,
@@ -60,7 +60,7 @@ const store = createStore({
         {
           imagen:
             "https://m.media-amazon.com/images/I/71PCPcDgfKL._AC_SY550_.jpg",
-          precio: "60.00$",
+          precio: 60.00,
           titulo: "BULLIANT - Cinturón con diseño ajustable ",
           descripcion: "con trinquete deslizante para hombre",
           id: 7,
@@ -68,7 +68,7 @@ const store = createStore({
         {
           imagen:
             "https://m.media-amazon.com/images/I/71Gfs4yKvBL._AC_SX466_.jpg",
-          precio: "35.00$",
+          precio: 35.00,
           titulo: "Dickies - Cinturón elástico",
           descripcion: "cinturon negro hecho 100% de piel",
           id: 8,
@@ -77,32 +77,29 @@ const store = createStore({
     };
   },
   mutations: {
+    incrementarCantidad(state, r) {
+      if (state.comprasrealizadas[r]) {
+        state.comprasrealizadas[r].cantidad += 1;
+      }
+    },
     agregarcompra(state, producto) {
-      if (state.comprasrealizadas.length > 0) {
-        let r = state.comprasrealizadas.findIndex((e) => {
-          return e.id == producto.id;
-        });
-        console.log(state.comprasrealizadas);
-        if (r == -1) state.comprasrealizadas.push(producto);
-        else {
-          state.comprasrealizadas[r].cantidad += 1;
-        }
-      } else state.comprasrealizadas.push(producto);
+      state.comprasrealizadas.push(producto);
     },
     eliminaritem(state, posicion) {
       state.comprasrealizadas.splice(posicion, 1);
     },
   },
   actions: {
-    agregarcompra({ commit }) {
-      commit("agregarcompra");
+    incrementarCantidad({ commit }, r) {
+      commit('incrementarCantidad', r);
     },
-
-    eliminaritem({ commit }) {
-      commit("eliminaritem");
+    agregarcompra({ commit }, producto) {
+      commit('agregarcompra', producto);
+    },
+    eliminaritem({ commit }, posicion) {
+      commit('eliminaritem', posicion);
     },
   },
-
   getters: {
     count: (state) => state.count,
     productos: (state) => state.productos,
@@ -113,6 +110,9 @@ const store = createStore({
       return cantidad;
     },
     procomprados: (state) => state.comprasrealizadas,
+    getProductoById: (state) => (id) => {
+      return state.comprasrealizadas.findIndex(pro => pro.id === id);
+    }
   },
 });
 
@@ -120,7 +120,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(store);
   return {
     provide: {
-      store: store,
-    },
+      store: store
+    }
   };
 });
